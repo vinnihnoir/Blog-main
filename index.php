@@ -26,7 +26,7 @@
 
                     require_once 'includes/funcoes.php';
                     require_once 'core/conexao_mysql.php';
-                    require_once 'core/mysql.php';
+                    require_once 'core/sql.php';
                     require_once 'core/mysql.php';
 
                     foreach($_GET as $indice => $dado){
