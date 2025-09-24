@@ -6,7 +6,7 @@
 
 <div class="card">
     <div class="card-header">
-        <h1> Projeto Blog em PHP + MySQL IFSP - MURILO</h1>
+        <h1> Projeto Blog em PHP + MySQL IFSP - VINICIUS MOLLINA</h1>
     </div>
     <?php if(isset($_SESSION['login'])): ?>
     <div class="card-body text-right">

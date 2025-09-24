@@ -144,7 +144,7 @@
             $expressao[count($expressao) - 1] = '?';
             $coringa_criterio[] = $expressao;
 
-            $nome_campo = (count($expressao) < 4) ? $expressao[0] : expressao[1];
+            $nome_campo = (count($expressao) < 4) ? $expressao[0] : $expressao[1];
 
             if(isset($$nome_campo)){
                 $nome_campo = $nome_campo . '_' . rand();
@@ -155,7 +155,9 @@
         }
 
         $instrucao = select($entidade, $campos, $coringa_criterio, $ordem);
+        echo $instrucao;
         $conexao = conecta();
+
         $stmt = mysqli_prepare($conexao, $instrucao);
 
         if(isset($tipo)){
@@ -171,7 +173,7 @@
         if($result = mysqli_stmt_get_result($stmt)){
             $retorno = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-            mysqli_free_result;
+            mysqli_free_result($result);
         }
 
         $_SESSION['errors'] = mysqli_stmt_error_list($stmt);
