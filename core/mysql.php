@@ -41,23 +41,25 @@
         }
 
         foreach ($criterio as $expressao) {
-        $dado = $expressao[count($expressao) -1];
+            $dado = $expressao[count($expressao) -1];
 
-        $tipo[] = gettype($dado) [0];
-        $expressao[count($expressao) - 1] = '?';
-        $coringa_criterio[] = $expressao;
+            $tipo[] = gettype($dado) [0];
+            $expressao[count($expressao) - 1] = '?';
+            $coringa_criterio[] = $expressao;
 
-        $nome_campo = (count($expressao) < 4) ? $expressao[0]: $expressao[1];
+            $nome_campo = (count($expressao) < 4) ? $expressao[0]: $expressao[1];
 
             if (isset($nome_campo)) {
                 $nome_campo = $nome_campo . '_' . rand();
             }
 
             $campos_criterio[] = $nome_campo;
-            $nome_campo = $dado;
+            $$nome_campo = $dado;
         }
 
         $instrucao = update($entidade, $coringa_dados, $coringa_criterio);
+        echo $instrucao;
+
 
         $conexao = conecta();
 
@@ -69,15 +71,17 @@
             $comando .= ', $' . implode(', $', array_keys($dados));
             $comando .= ', $' . implode(', $', $campos_criterio);
             $comando .= ');';
-
+            echo $comando;
             eval($comando);
         }
 
         mysqli_stmt_execute($stmt);
 
-        $retorno = (boolean) mysqli_stmt_affected_rows($stmt);
+        $retorno = (boolean)mysqli_stmt_affected_rows($stmt);
 
         $_SESSION['errors'] = mysqli_stmt_error_list($stmt);
+
+        //print_r($_SESSION);
 
         mysqli_stmt_close($stmt);
 
@@ -104,6 +108,7 @@
             $campos_criterio[] = $nome_campo;
 
             $$nome_campo = $dado;
+            
         }
 
         $instrucao = delete($entidade, $coringa_criterio);

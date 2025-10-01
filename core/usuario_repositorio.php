@@ -85,13 +85,16 @@
             $valor = (int)$valor;
 
             $dados = [
-                'ativo' => $ativo
+                'ativo' => $valor
             ];
 
             $criterio = [
                 ['id', '=', $id]
             ];
-            $atualiza(
+            //echo $id . "id<br>";
+            //echo $valor . "murilo<br>";
+    
+            atualiza(
                 'usuario',
                 $dados,
                 $criterio
@@ -122,5 +125,5 @@
             exit;
             break;
     }
-    header('Location: ../index.php')
+   header('Location: ../index.php')
 ?>
