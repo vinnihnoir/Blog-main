@@ -155,7 +155,7 @@
         }
 
         $instrucao = select($entidade, $campos, $coringa_criterio, $ordem);
-        echo $instrucao;
+        //echo $instrucao;
         $conexao = conecta();
 
         $stmt = mysqli_prepare($conexao, $instrucao);

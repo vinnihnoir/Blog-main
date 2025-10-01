@@ -1,5 +1,4 @@
 <?php
-
     session_start();
     require_once '../includes/valida_login.php';
     require_once '../includes/funcoes.php';
@@ -7,31 +6,33 @@
     require_once 'sql.php';
     require_once 'mysql.php';
 
-    foreach($_POST as $indice => $dado){
+    foreach($_POST as $indice => $dado)
+    {
         $$indice = limparDados($dado);
     }
-
-    foreach($_GET as $indice => $dado){
+    foreach($_GET as $indice => $dado)
+    {
         $$indice = limparDados($dado);
     }
 
     $id = (int)$id;
 
-    switch($acao){
+    switch ($acao)
+    {
         case 'insert':
             $dados = [
-                'titulo'           =>  $titulo,
-                'texto'            =>  $texto,
-                'data_postagem'    =>  "$data_postagem $hora_postagem",
-                'usuario_id'       =>  $_SESSION['login']['usuario']['id']
+                'titulo' => $titulo,
+                'texto' => $texto,
+                'data_postagem' => "$data_postagem $hora_postagem",
+                'usuario_id' => $_SESSION['login']['usuario']['id']
             ];
-        
-        insere (
-            'post',
-            $dados
-        );
 
-        break;
+            insere(
+                'post',
+                $dados
+            );
+
+            break;
 
         case 'update':
             $dados = [
@@ -42,21 +43,22 @@
             ];
 
             $criterio = [
-                ['id', '=', $id]
+                ['id', '=', $id],
+
             ];
 
             atualiza(
                 'post',
+                $dados,
                 $criterio
             );
 
             break;
+        case 'delete':
+            $criterio = [
+                ['id', '=', $id]
+            ];
 
-            case 'delete':
-                $criterio = [
-                    ['id', '=', $id]
-                ];
-            
             deleta(
                 'post',
                 $criterio
